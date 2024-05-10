@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://appsrv1-147a1.kxcdn.com/soft-ui-dashboard-flask-v1.0.8/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="https://appsrv1-147a1.kxcdn.com/soft-ui-dashboard-flask-v1.0.8/img/favicon.png">
+    <link rel="canonical" href="https://appseed.us/product/soft-ui-dashboard/flask/">
+    <meta name="google-site-verification" content="kCT200-J0rfczENRkJQdYCqsDKkUo3Hvr3KZic_otwU">
+    <title>Sistem Prediksi Bank Churn</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://appsrv1-147a1.kxcdn.com/soft-ui-dashboard-flask-v1.0.8/css/nucleo-icons.css" rel="stylesheet">
+    <link href="https://appsrv1-147a1.kxcdn.com/soft-ui-dashboard-flask-v1.0.8/css/nucleo-svg.css" rel="stylesheet">
+    <link href="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous">
+    <link href="https://appsrv1-147a1.kxcdn.com/soft-ui-dashboard-flask-v1.0.8/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet">
+    <link href="https://appsrv1-147a1.kxcdn.com/soft-ui-dashboard-flask-v1.0.8/css/dark-theme-core.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container position-sticky z-index-sticky top-0 bg-gradient-pink">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4 navbar-dark">
+                    <div class="container-fluid pe-0">
+                        <div class="collapse navbar-collapse" id="navigation">
+                            <ul class="navbar-nav mx-auto ms-xl-auto">
+                                <li class="nav-item">
+                                    <label for="theme-switch" class="nav-link me-2">
+                                        <span class="btn btn-round btn-sm mb-0 btn-outline-primary me-2">
+                                            <h1 class="text-pink" id="theme-indicator"></h1> Selamat Datang Di Sistem Prediksi Nasabah Bank
+                                        </span>
+                                    </label>
+                                    <input type="checkbox" class="d-none" id="theme-switch">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <main class="main-content mt-0">
+        <section>
+            <div class="page-header min-vh-75">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
+                            <div class="card card-plain mt-8">
+                                <div class="card-header pb-0 text-center bg-transparent">
+                                    <h3 class="font-weight-bolder text-info text-gradient">Silahkan Memasukkan Data Dari Nasabah Yang Akan di Prediksi</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form action="{{ url_for('predict')}}" method="post">
+
+                                        <!-- All input fields in one div -->
+                                        <div class="mb-3">
+                                            <input class="form-control" id="total_transaction" name="total_transaction" placeholder="Total Transaction Customer" required type="text">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <input class="form-control" id="revolving_balance" name="revolving_balance" placeholder="Total Revolving Balance" required type="text">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <input class="form-control" id="customer_age" name="customer_age" placeholder="Customer Age" required type="text">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <input class="form-control" id="avg_utilization_ratio" name="avg_utilization_ratio" placeholder="Avg Utilization Ratio" required type="text">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <input class="form-control" id="months_inactive" name="months_inactive" placeholder="Months Inactive" required type="text">
+                                        </div>
+
+                                        <!-- Existing Sign IN and Sign UP buttons -->
+                                        <div class="text-center">
+                                            <button type="submit" name="login" class="btn bg-gradient-info w-100 mt-4 mb-0">Predict</button>
+                                        </div>
+
+                                       <br>
+                                        <br>
+
+
+                                        <!-- Display prediction result -->
+                                       <div class="prediction text-center"> <!-- Tampilkan hasil prediksi di tengah -->
+    <h5>Dari data yang dibaca sistem maka nasabah ini diprediksi akan</h5>
+    <!-- Display prediction result here -->
+    {% if prediction_result == 0 %}
+    <h2 class="text-success">Tidak Churn</h2> <!-- Gunakan kelas "text-success" untuk warna hijau -->
+    {% elif prediction_result == 1 %}
+    <h2 class="text-danger">Churn</h2> <!-- Gunakan kelas "text-danger" untuk warna merah -->
+    {% else %}
+    <h2>Unknown</h2>
+    {% endif %}
+</div>
+
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
+                                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('https://asset.kompas.com/crops/Nwq5OmKljS7OTXl-hRQqFvd9Ook=/0x342:6848x4907/1200x800/data/photo/2023/11/02/654370c8391eb.jpg')"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
+                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4"><span class="text-lg fab fa-dribbble"></span></a>
+                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4"><span class="text-lg fab fa-twitter"></span></a>
+                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4"><span class="text-lg fab fa-instagram"></span></a>
+                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4"><span class="text-lg fab fa-pinterest"></span></a>
+                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4"><span class="text-lg fab fa-github"></span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://appsrv1-147a1.kxcdn.com/soft-ui-dashboard-flask-v1.0.8/js/core/popper.min.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/soft-ui-dashboard-flask-v1.0.8/js/core/bootstrap.min.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/soft-ui-dashboard-flask-v1.0.8/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/soft-ui-dashboard-flask-v1.0.8/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/soft-ui-dashboard-flask-v1.0.8/js/dark-mode-handler.js"></script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+          var options = {
+            damping: '0.5'
+          }
+          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://appsrv1-147a1.kxcdn.com/soft-ui-dashboard-flask-v1.0.8/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
+    <script>
+        // Function to toggle dark mode and light mode
+        function toggleDarkMode() {
+            var body = document.body;
+            body.classList.toggle("dark-theme"); // Toggle dark mode class
+        }
+
+        // Add event listener to the theme switch button
+        var themeSwitch = document.getElementById("theme-switch");
+        themeSwitch.addEventListener("change", toggleDarkMode);
+    </script>
+</body>
+</html>
